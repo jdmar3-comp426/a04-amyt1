@@ -22,14 +22,15 @@ app.listen(HTTP_PORT, () => {
 // READ (HTTP method GET) at root endpoint /app/
 app.get("/app/", (req, res, next) => {
     res.json({"message":"Your API works! (200)"});
-	res.status(200);
+		res.status(200);
 });
 
 // Define other CRUD API endpoints using express.js and better-sqlite3
 // CREATE a new user (HTTP method POST) at endpoint /app/new/
 app.post("/app/new/", (req, res) => {	
-	const stmt = db.prepare("INSERT INTO userinfo (user, pass) VALUES (?, ?)").run(req.body.user, md5(req.body.pass));
-	res.status(201).json({"message":stmt.changes +" record created: ID " + stmt.lastInsertRowid + " (201)"});
+	const stmt = db.prepare("INSERT INTO userinfo (user, pass) VALUES (?, ?)")
+	const information = stmt.run(req.body.user, md5(req.body.pass));
+	res.status(201).json({"message": information.changes +" record created: ID " + information.lastInsertRowid + " (201)"});
 });
 
 // READ a list of all users (HTTP method GET) at endpoint /app/users/
@@ -58,6 +59,6 @@ app.delete("/app/delete/user/:id", (req, res) => {
 
 // Default response for any other request
 app.use(function(req, res){
-	res.json({"message":"Endpoint not found. (404)"});
+	res.json({"message":"Your API is working!"});
     res.status(404);
 });
