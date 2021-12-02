@@ -3,10 +3,10 @@ var express = require("express")
 var app = express()
 
 // Require database SCRIPT file
-var db = require("./database.js");
+var db = require("./database.js")
 
 // Require md5 MODULE
-var md5 = require("md5");
+var md5 = require("md5")
 
 // Make Express use its own built-in body parser
 app.use(express.urlencoded({ extended: true }));
@@ -62,6 +62,6 @@ app.delete("/app/delete/user/:id", (req, res) => {
 
 // Default response for any other request
 app.use(function(req, res){
-		res.json({"message":"Your API is working!"});
+	res.json({"message":"Your API is working!"});
     res.status(404);
 });
