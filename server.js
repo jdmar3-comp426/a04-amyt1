@@ -35,13 +35,13 @@ app.post("/app/new/", (req, res) => {
 // READ a list of all users (HTTP method GET) at endpoint /app/users/
 app.get("/app/users/", (req, res) => {	
 	const stmt = db.prepare("SELECT * FROM userinfo").all();
-	res.status(200).json(stmt);
+	res.json(stmt).status(200);
 });
 
 // READ a single user (HTTP method GET) at endpoint /app/user/:id
 app.get("/app/users/:id", (req, res) => {	
 	const stmt = db.prepare("SELECT * FROM userinfo WHERE id = ?").get(req.params.id);
-	res.status(200).json(stmt);
+	res.json(stmt).status(200);
 });
 
 // UPDATE a single user (HTTP method PATCH) at endpoint /app/update/user/:id
